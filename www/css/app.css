@@ -1,0 +1,21 @@
+/* General */
+
+.alert,
+.iew__view_main {
+	display: none;
+}
+
+#iew_button__upload_json {
+	overflow: hidden;
+    width: 100%;
+}
+
+
+/* New Wallet */
+
+.iew_info__new_wallet_progress,
+.iew_info__new_wallet_privatekey,
+#iew_button__new_wallet_download {
+	display: none;
+}
+
