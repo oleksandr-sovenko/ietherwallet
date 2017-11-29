@@ -4,6 +4,6 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Usage ###
 
-* npm insall express ejs --save
+* npm install --save express ejs
 * node app.js
 
