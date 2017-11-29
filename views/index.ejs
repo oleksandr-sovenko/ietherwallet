@@ -1,0 +1,41 @@
+<% include partials/header %>
+
+<div class="jumbotron">
+    <h1>Create New Wallet</h1>
+
+    <form class="iew_form__create_new_wallet">
+        <p class="lead">
+            This password encrypts your private key. This does not act as a seed to generate your keys. <br>
+            <strong>You will need this password + your private key to unlock your wallet.</strong>
+        </p>
+
+        <div class="form-group">
+            <input class="form-control" type="password" name="" placeholder="Password">
+        </div>
+
+        <div class="form-group">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+            </div>
+        </div>
+
+        <div class="alert" role="alert"></div>
+
+        <div class="form-group">
+            <button class="btn btn-info">Create New Wallet</button>
+        </div>
+    </form>
+
+    <form class="iew_form__create_new_wallet_done">
+        <p class="lead">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.
+        </p>
+
+        <div class="form-group">
+            <label><strong>Private Key:</strong> <span class="private-key">None</span></label><br>
+            <a class="btn btn-success download-json-file" href="#" role="button">Download Keystore / JSON File</a>
+        </div>                        
+    </form>
+</div>
+
+<% include partials/footer %>
