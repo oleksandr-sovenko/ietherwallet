@@ -5,7 +5,7 @@
 
     <form class="iew_form__unlock_wallet">
         <p class="lead">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.        
+            Use your Keystore / JSON File
         </p>
 
         <div class="row">
@@ -52,14 +52,15 @@
     </form>
 
     <form class="iew_form__send_ether_tokens generate">
-        <div class="row">
-            <div class="col-md-4">
-                <strong>Balance:</strong> <span class="balance">0</span> Ether
+        <div class="row info">
+            <div class="col-md-5">
+                <strong>Address:</strong> <span class="address">0x000000000000000000000000000000000000000</span>
             </div>
             <div class="col-md-4">
+                <strong>Balance:</strong> <span class="balance">0</span> ETH
+            </div>
+            <div class="col-md-3">
                 <strong>No Of Transactions:</strong> <span class="transaction_count">0</span> txns
-            </div>
-            <div class="col-md-4">
             </div>
         </div>
                 
@@ -106,7 +107,7 @@
             </div>
         </div>
 
-         <div class="alert" role="alert"></div>
+        <div class="alert" role="alert"></div>
 
         <div class="form-group">
             <button class="btn btn-danger" type="submit">Send</button>
@@ -145,14 +146,15 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
+                <div class="form-group">
                     You are about to send <span class="amount">0.0</span> Ether<br>
                     to address <span class="to">0x000000000000000000000000000000000000000</span>.<br>
                     Are you sure you want to do this?
-                    </div>
                 </div>
+
+                <div class="alert" role="alert"></div>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary yes">Yes</button>
                 <button type="button" class="btn btn-secondary no" data-dismiss="modal">NO</button>

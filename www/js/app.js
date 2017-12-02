@@ -19,9 +19,10 @@ $(document).on('submit', '.iew_form__unlock_wallet', function(event) {
         }, function(wallet) {
             form.hide();
             form = $('.iew_form__send_ether_tokens.generate');
+            form.find('.info .address').text(wallet.address);
+            form.find('.info .balance').text(ethers.utils.formatEther(wallet.balance));
+            form.find('.info .transaction_count').text(wallet.transactionCount);
             form.show();
-            form.find('.balance').text(ethers.utils.formatEther(wallet.balance));
-            form.find('.transaction_count').text(wallet.transactionCount);
         }, function(error) {
             e = error.replace('Error:', '<strong>Error:</strong>');
             if (!/Error/.test(e))
@@ -167,12 +168,22 @@ $(document).on('click', '.iew_modal__confirm_transaction .yes', function(event) 
 
     var form = $('.iew_form__send_ether_tokens.send');
 
-    iEtherWallet.sendTransaction(form.find('.signed_transaction').val(),
+    iEtherWallet.sendTransaction(
+        form.find('.signed_transaction').val(),
         function(transactionHash) {
             form.find('textarea,button').prop('disabled', true);
             $('.iew_modal__confirm_transaction').modal('hide');
             $('.iew_form__send_ether_tokens.finish').show();
             $('.transaction_hash').text(transactionHash.toString());
+        }, function(error) {
+            var form = $('.iew_modal__confirm_transaction'),
+                e = error.replace('Error:', '<strong>Error:</strong>');
+            
+            if (!/Error/.test(e))
+                e = '<strong>Error:</strong> ' + e;
+
+            form.find('.alert').attr('class', 'alert alert-danger').html(e).show().
+                stop().delay(6000).queue(function() { $(this).hide(); });
         }
     );
 });

@@ -35,3 +35,11 @@
 	display: none;
 }
 
+.iew_form__send_ether_tokens.generate .info {
+	font-size: 13px;
+    background: #27a1b8;
+    color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    margin: 0px 0px 16px 0px;
+}
