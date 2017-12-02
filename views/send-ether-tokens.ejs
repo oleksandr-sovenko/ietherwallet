@@ -1,7 +1,7 @@
 <% include partials/header %>
 
 <div class="jumbotron">
-    <h1>Send Ether & Tokens</h1>
+    <h1>Send Ether <s>& Tokens</s></h1>
 
     <form class="iew_form__unlock_wallet">
         <p class="lead">
@@ -9,12 +9,29 @@
         </p>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="form-group">
                     <input style="display: none" type="file" name="files[]">
                     <button class="btn btn-info" name="select-file">Select Wallet File ...</a>
                 </div>
+            </div>
 
+            <div class="col-md-4" style="text-align: right">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Network
+                    </button>
+                    <div class="dropdown-menu select-network" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#etherscan::homestead">Etherscan: Main</a>
+                        <a class="dropdown-item" href="#etherscan::ropsten">Etherscan: Ropsten</a>
+                        <a class="dropdown-item" href="#etherscan::rinkeby">Etherscan: Rinkeby</a>
+                    </div>
+                </div>  
+            </div>
+        </div>        
+
+        <div class="row">
+            <div class="col-md-12">
                 <div class="form-group">
                     <input class="form-control" type="password" name="password" placeholder="Password">
                 </div>
@@ -22,16 +39,23 @@
                 <div class="alert" role="alert"></div>
 
                 <div class="form-group">
-                    <button class="btn btn-danger" type="submit">UnLock</button>
+                    <button class="btn btn-danger unlock" type="submit">UnLock</button>
                 </div>
             </div>
         </div>
     </form>
 
-    <form class="iew_form__send_ether_tokens">
-        <p class="lead">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.        
-        </p>
+    <form class="iew_form__send_ether_tokens generate">
+        <div class="row">
+            <div class="col-md-4">
+                <strong>Balance:</strong> <span class="balance">0</span> Ether
+            </div>
+            <div class="col-md-4">
+                <strong>No Of Transactions:</strong> <span class="transaction_count">0</span> txns
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
                 
         <div class="row">
             <div class="col-md-12">
@@ -42,13 +66,15 @@
                 
                 <div class="form-group">
                     <label>Amount to Send</label>
-                    <input class="form-control" type="text" name="amount" placeholder="Amounth">
+                    <input class="form-control" type="number" name="amount" placeholder="Amounth" step="any">
                 </div>
                 
                 <div class="form-group">
                     <label>Gas Limit</label>
-                    <input class="form-control" type="text" name="gas_limit" placeholder="21000">
+                    <input class="form-control" type="text" name="gas_limit" placeholder="21000" value="21000">
                 </div>
+
+                 <div class="alert" role="alert"></div>
                 
                 <div class="form-group">
                     <button class="btn btn-info" type="submit">Generate Transaction</button>
@@ -56,6 +82,77 @@
             </div>
         </div>
     </form>
+
+    <form class="iew_form__send_ether_tokens send">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Raw Transaction</label>
+                    <textarea class="form-control raw_transaction"></textarea>
+                </div>                
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Signed Transaction</label>
+                    <textarea class="form-control signed_transaction"></textarea>
+                </div>
+            </div>
+        </div>
+
+         <div class="alert" role="alert"></div>
+
+        <div class="form-group">
+            <button class="btn btn-danger" type="submit">Send</button>
+        </div>        
+    </form>
+
+    <div class="iew_form__send_ether_tokens finish">
+        <div class="alert alert-success" role="alert">
+            <strong>Well done! Transaction:</strong> <span class="transaction_hash">0x000000000000000000000000000000000000000</span>
+        </div>
+    </div>     
+</div>
+
+<div class="modal fade iew_modal__confirm_transaction">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm transaction</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>From</label>
+                        <input class="form-control from" value="0x000000000000000000000000000000000000000" disabled>
+                    </div>
+                    <div class="col-md-2" style="text-align: center;">
+                        <label>Amount</label>
+                        <h3><span class="amount">0.0</span> ETH</h3>
+                    </div>
+                    <div class="col-md-5">
+                        <label>To</label>
+                        <input class="form-control to" value="0x000000000000000000000000000000000000000" disabled>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                    You are about to send <span class="amount">0.0</span> Ether<br>
+                    to address <span class="to">0x000000000000000000000000000000000000000</span>.<br>
+                    Are you sure you want to do this?
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary yes">Yes</button>
+                <button type="button" class="btn btn-secondary no" data-dismiss="modal">NO</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <% include partials/footer %>

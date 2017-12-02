@@ -1,6 +1,7 @@
 /* General */
 
-.alert,
+.iew_form__create_new_wallet .alert,
+.iew_form__unlock_wallet .alert,
 .iew__view_main {
 	display: none;
 }
@@ -8,6 +9,13 @@
 #iew_button__upload_json {
 	overflow: hidden;
     width: 100%;
+}
+
+@media (min-width: 576px) {
+	.modal-dialog {
+    	max-width: 800px;
+    	margin: 30px auto;
+	}
 }
 
 
