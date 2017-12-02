@@ -1,5 +1,6 @@
 /* General */
 
+.progress,
 .iew_form__create_new_wallet .alert,
 .iew_form__unlock_wallet .alert,
 .iew__view_main {
@@ -22,7 +23,6 @@
 
 /* New Wallet */
 
-.iew_form__create_new_wallet .progress,
 .iew_form__create_new_wallet_done {
 	display: none;
 }

@@ -13,7 +13,10 @@ $(document).on('submit', '.iew_form__unlock_wallet', function(event) {
 
     iEtherWallet.unlockWallet(
         password,
-        function(wallet){
+        function(percent) {
+            form.find('.progress').show().find('.progress-bar').attr('aria-valuenow', percent)
+                .css({ width: percent + '%' }).text(percent + '%');
+        }, function(wallet) {
             form.hide();
             form = $('.iew_form__send_ether_tokens.generate');
             form.show();
@@ -27,6 +30,7 @@ $(document).on('submit', '.iew_form__unlock_wallet', function(event) {
             form.find('.alert').attr('class', 'alert alert-danger').html(e).show()
                 .stop().delay(3000).queue(function() {
                     form.find('input,button,textarea').prop('disabled', false);
+                    form.find('.progress').hide();
                     $(this).hide();
                 });
         }
@@ -289,10 +293,13 @@ var iEtherWallet = {
     /**
      *
      */
-    unlockWallet: function(password, callback_success, callback_fail) {
+    unlockWallet: function(password, callback_percent, callback_success, callback_fail) {
         var __this = this;
 
-        ethers.Wallet.fromEncryptedWallet(this.json, password/*, function(a) { console.log(a) }*/).then(function(wallet) {
+        ethers.Wallet.fromEncryptedWallet(this.json, password, function(percent) {
+            if (callback_percent !== undefined)
+                callback_percent(parseInt(percent * 100));
+        }).then(function(wallet) {
         	__this.wallet = wallet;
 
             if (__this.provider !== undefined)
@@ -324,62 +331,3 @@ var iEtherWallet = {
         });
     }
 };
-
-
-/*
-
-Raw Transaction
-
-{"nonce":"0x1e","gasPrice":"0x05f5e100","gasLimit":"0x5208","to":"0x17FA8bE13F87a3a625bAAdeE901844298074F91c","value":"0x0186cc6acd4b0000","data":"","chainId":4}
-
-Signed Transaction
-
-0xf86b1e8405f5e1008252089417fa8be13f87a3a625baadee901844298074f91c880186cc6acd4b0000802ca0d0816ca0bc9e4f70d4134410e3ef694a35f849e6affad732068a23aa34e7857ba03dace4b53145f78a58f8447b68dbcc3e2f222aa0e8acf6e243242d880ef191fa
-
-
-
-Warning!
-
-0x3309a55B6AfbECb56783d694aC541AA5B3d05A2E
--> 
-0.11 RINKEBY ETH
-0x17FA8bE13F87a3a625bAAdeE901844298074F91c
-
-You are about to send 0.11 RINKEBY ETH 
-to address 0x17FA8bE13F87a3a625bAAdeE901844298074F91c.
-You are interacting with the RINKEBY ETH chain , provided by Etherscan.io .
-Are you sure you want to do this?
-
-
-
-Your 1234XXXXTX has been broadcast to the network. It is waiting to be mined & confirmed. During ICOs, it may take 3+ hours to confirm. Use the Verify & Check buttons below to see. TX Hash: 0xd36bfe7d1e08fda95c2d1ab9f9b6e3660755c93d1a7bc93c47221225ac5f6ee3
-
-
-
-*/
-
-
-
-/*
-
-Save your Keystore File.
-Download Keystore File (UTC / JSON)
-Do not lose it! It cannot be recovered if you lose it.
-
-Do not share it! Your funds will be stolen if you use this file on a malicious/phishing site.
-
-Make a backup! Secure it like the millions of dollars it may one day be worth.
-
-I understand. Continue.
-Not Downloading a File?
-Try using Google Chrome
-Right click & save file as. Filename:
-
-UTC--2017-11-28T01-12-59.464Z--78f6c428733e290098bd4a86f979231e023ecb10
-Don't open this file on your computer
-Use it to unlock your wallet via MyEtherWallet (or Mist, Geth, Parity and other wallet clients.)
-Guides & FAQ
-How to Back Up Your Keystore File
-What are these Different Formats?
-
-*/
